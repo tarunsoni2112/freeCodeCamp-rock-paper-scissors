@@ -1,0 +1,42 @@
+import random
+
+# Rock, Paper, Scissors logic
+def player(previous_opponent_move, opponent_history):
+    # Keep track of the opponent's past moves
+    opponent_history.append(previous_opponent_move)
+
+    # Implement a random strategy for the player
+    move = random.choice(["Rock", "Paper", "Scissors"])
+
+    return move
+
+def main():
+    # Set up a dictionary to store the results of matches against each bot
+    results = {"Bot 1": 0, "Bot 2": 0, "Bot 3": 0, "Bot 4": 0}
+
+    # Run matches against each bot using a for loop
+    for bot in range(1, 5):
+        print(f"Playing against Bot {bot}")
+
+        # Initialize opponent history and previous opponent move
+        opponent_history = []
+        previous_opponent_move = "None"
+
+        # Run matches against the bot using a for loop
+        for _ in range(1000):
+            # Determine the player's move
+            move = player(previous_opponent_move, opponent_history)
+
+            # Play the game and get the outcome
+            outcome = play(move, bot)
+
+            # Update the result of the bot
+            results[f"Bot {bot}"] += outcome
+
+            # Update the previous opponent move
+            previous_opponent_move = move
+
+        print(f"Result against Bot {bot}: {results[f'Bot {bot}']}\n")
+
+if __name__ == "__main__":
+    main()
